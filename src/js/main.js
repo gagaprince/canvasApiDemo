@@ -26,8 +26,24 @@ $(document).ready(function(){
         drawUtil.fillRectByColorAndRad(50,50,200,200,"#123456",rad);
     });*/
 
-    animateUtil.scale(1,2,4,function(scale){
+    /*animateUtil.scale(1,2,4,function(scale){
         drawUtil.clear();
         drawUtil.fillRectByColorAndScale(50,50,200,200,"#123456",scale);
-    });
+    });*/
+
+    drawUtil.fillRectByColor(50,400,200,100);
+    drawUtil.fillRectByColor(fireP.getX(),fireP.getY(),200,200,"#123456");
+
+    var eventManager = EventManager();
+    eventManager.addListener("touchend",function(e){
+        var touchEvent = e.changedTouches[0];
+        var locationX = touchEvent.clientX,locationY = touchEvent.clientY;
+        if(locationX>50&&locationX<250&&locationY>400&&locationY<500){
+            animateUtil.move(beginP,endP,fireP,3,function(){
+                drawUtil.clear();
+                drawUtil.fillRectByColor(50,400,200,100);
+                drawUtil.fillRectByColor(fireP.getX(),fireP.getY(),200,200,"#123456");
+            });;
+        }
+    },this);
 });
