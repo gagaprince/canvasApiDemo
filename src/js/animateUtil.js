@@ -34,7 +34,6 @@ AnimateUtil.prototype={
         var _this = this;
         this._addTask(function(){
             var timeNow = new Date().getTime();
-            console.log("timeNow:"+timeNow);
             var timeStep = timeNow-timeCount;
             if(timeStep>timeLength){//此时说明已经超过动画运行时间
                 fireP.set(endP.getX(),endP.getY());
@@ -51,9 +50,56 @@ AnimateUtil.prototype={
         });
     },
     //旋转
-    rotate:function(){},
+    //传入的角度是数字
+    rotate:function(beginR,endR,t,call){
+        var timeCount = new Date().getTime();   //记录开始的时间点
+        var timeLength = t*1000;                //记录时间长度
+
+        var lengthR = endR-beginR;
+        var rate = lengthR/timeLength;
+
+        var _this = this;
+        this._addTask(function(){
+            var timeNow = new Date().getTime();
+            var timeStep = timeNow-timeCount;
+            var nowR;
+            if(timeStep>timeLength){//此时说明已经超过动画运行时间
+                nowR = endR;
+                //remove task
+                _this._removeTask(arguments.callee);
+            }else{//计算出新的角度值
+                nowR = beginR + rate*timeStep;
+            }
+            if(call){
+                call(nowR);
+            }
+        });
+    },
     //放缩
-    scale:function(){},
+    scale:function(beginS,endS,t,call){
+        var timeCount = new Date().getTime();   //记录开始的时间点
+        var timeLength = t*1000;                //记录时间长度
+
+        var lengthS = endS-beginS;
+        var rate = lengthS/timeLength;
+
+        var _this = this;
+        this._addTask(function(){
+            var timeNow = new Date().getTime();
+            var timeStep = timeNow-timeCount;
+            var nowS;
+            if(timeStep>timeLength){//此时说明已经超过动画运行时间
+                nowS = endS;
+                //remove task
+                _this._removeTask(arguments.callee);
+            }else{//计算出新的角度值
+                nowS = beginS + rate*timeStep;
+            }
+            if(call){
+                call(nowS);
+            }
+        });
+    },
     //开始任务
     _beginTask:function(){
         var _this = this;

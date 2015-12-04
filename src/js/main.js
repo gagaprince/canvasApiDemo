@@ -14,11 +14,20 @@ $(document).ready(function(){
     var endP = Point(50,50);
     var fireP = Point(10,10);
 
-    drawUtil.fillRectByColor(fireP.getX(),fireP.getY(),200,200,"#123456");
+//    drawUtil.fillRectByColor(fireP.getX(),fireP.getY(),200,200,"#123456");
 
-    animateUtil.move(beginP,endP,fireP,3,function(){
+    /*animateUtil.move(beginP,endP,fireP,3,function(){
         drawUtil.clear();
         drawUtil.fillRectByColor(fireP.getX(),fireP.getY(),200,200,"#123456");
-    });
+    });*/
 
+    /*animateUtil.rotate(0,2*Math.PI,2,function(rad){
+        drawUtil.clear();
+        drawUtil.fillRectByColorAndRad(50,50,200,200,"#123456",rad);
+    });*/
+
+    animateUtil.scale(1,2,4,function(scale){
+        drawUtil.clear();
+        drawUtil.fillRectByColorAndScale(50,50,200,200,"#123456",scale);
+    });
 });

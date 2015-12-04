@@ -30,6 +30,27 @@ DrawUtil.prototype={
         ctx.fillRect(beginX,beginY,width,height);
         ctx.restore();
     },
+    fillRectByColorAndRad:function(beginX,beginY,width,height,color,rad){
+        var ctx = this.ctx;
+        ctx.save();
+        ctx.translate(beginX,beginY);//这里顺序是很重要的
+        //先旋转画笔
+        ctx.rotate(rad);
+
+        this.fillRectByColor(0,0,width,height,color);
+        ctx.restore();
+    },
+    fillRectByColorAndScale:function(beginX,beginY,width,height,color,scale){
+        var ctx = this.ctx;
+        ctx.save();
+        ctx.translate(beginX,beginY);//这里顺序是很重要的
+        ctx.scale(scale,scale);
+        this.fillRectByColor(0,0,width,height,color);
+//        this.fillRectByColor(0,0,width*scale,height*scale,color);
+
+        //思考那种方式比较好，为什么？
+        ctx.restore();
+    },
     //画线
     drawLine:function(beginX,beginY,endX,endY,color){
         var ctx = this.ctx;
