@@ -11,9 +11,13 @@ function DrawUtil(){
 DrawUtil.prototype={
     canvas:null,
     ctx:null,
+    width:0,
+    height:0,
     init:function(){
         this.canvas = document.getElementById("gameCavas");
         this.ctx = this.canvas.getContext("2d");
+        this.width = this.canvas.width;
+        this.height = this.canvas.height;
     },
     //绘制一个矩形
     //起始点坐标
@@ -73,5 +77,9 @@ DrawUtil.prototype={
         img.addEventListener("error",function(){
             onError();
         })
+    },
+    //清除屏幕
+    clear:function(){
+        this.fillRectByColor(0,0,this.width,this.height,"#ffffff");
     }
 }
